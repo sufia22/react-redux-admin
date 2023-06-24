@@ -1,10 +1,21 @@
+import PageLayout from "../components/PageLayout/PageLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
+import User from "../pages/user/User";
 
 // create private router
 const privateRouter = [
   {
-    path: "/",
-    element: <Dashboard />,
+    element: <PageLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+      },
+      {
+        path: "/users",
+        element: <User />,
+      },
+    ],
   },
 ];
 
