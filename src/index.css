@@ -20,3 +20,9 @@
   bottom: 38px;
   right: 30px;
 }
+
+.page-header .header-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}

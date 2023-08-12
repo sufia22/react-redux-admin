@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logoWhite from "../../assets/img/logo-white.png";
 
 const Forgot = () => {
@@ -38,7 +39,7 @@ const Forgot = () => {
                   {/* <!-- /Form --> */}
 
                   <div className="text-center dont-have">
-                    Remember your password? <a href="login.html">Login</a>
+                    Remember your password? <Link to={"/login"}> Login</Link>
                   </div>
                 </div>
               </div>

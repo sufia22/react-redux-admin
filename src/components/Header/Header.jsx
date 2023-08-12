@@ -1,12 +1,23 @@
 import logo from "../../assets/img/logo.png";
 import logoSmall from "../../assets/img/logo-small.png";
-import avatar01 from "../../assets/img/profiles/avatar-01.jpg";
 import doctor01 from "../../assets/img/doctors/doctor-thumb-01.jpg";
 import patient1 from "../../assets/img/patients/patient1.jpg";
 import patient2 from "../../assets/img/patients/patient2.jpg";
 import patient3 from "../../assets/img/patients/patient3.jpg";
+import { logoutUser } from "../../features/auth/authApiSlice";
+import { useDispatch } from "react-redux";
+import useAuthUser from "../../hooks/useAuthUser";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { user } = useAuthUser();
+
+  // handle user logout
+  const handleUserLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser());
+  };
+
   return (
     <>
       <div className="header">
@@ -185,9 +196,13 @@ const Header = () => {
               <span className="user-img">
                 <img
                   className="rounded-circle"
-                  src={avatar01}
+                  src={
+                    user?.photo
+                      ? user?.photo
+                      : "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
+                  }
+                  alt={user?.name}
                   width="31"
-                  alt="Ryan Taylor"
                 />
               </span>
             </a>
@@ -195,14 +210,18 @@ const Header = () => {
               <div className="user-header">
                 <div className="avatar avatar-sm">
                   <img
-                    src={avatar01}
-                    alt="User Image"
+                    src={
+                      user?.photo
+                        ? user?.photo
+                        : "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
+                    }
+                    alt={user?.name}
                     className="avatar-img rounded-circle"
                   />
                 </div>
                 <div className="user-text">
-                  <h6>Ryan Taylor</h6>
-                  <p className="text-muted mb-0">Administrator</p>
+                  <h6>{user?.name}</h6>
+                  <p className="text-muted mb-0">{user?.role?.name}</p>
                 </div>
               </div>
               <a className="dropdown-item" href="profile.html">
@@ -211,7 +230,7 @@ const Header = () => {
               <a className="dropdown-item" href="settings.html">
                 Settings
               </a>
-              <a className="dropdown-item" href="login.html">
+              <a className="dropdown-item" onClick={handleUserLogout} href="/">
                 Logout
               </a>
             </div>
